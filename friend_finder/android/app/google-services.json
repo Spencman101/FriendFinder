@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "777982624826",
+    "project_id": "friend-finder-d92bc",
+    "storage_bucket": "friend-finder-d92bc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777982624826:android:5588454a7805742ab1e103",
+        "android_client_info": {
+          "package_name": "com.example.friend_finder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB45wSXd8dF8h5jOAebNMjelYV1hOf1GmE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

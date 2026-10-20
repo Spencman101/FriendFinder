@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -10,27 +16,40 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // Color scheme defined before all data of the app is loaded, ensures all themes are read.
+    final colorScheme = ColorScheme.fromSeed(
+      seedColor: const Color(0xFF4C6085),
+      primary: const Color(0xFF4C6085),
+      secondary: const Color(0xFFCF995F),
+      tertiary: const Color(0xFF6D9F71),
+    );
+    
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'FriendFinder',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        // This is the theme of the application.
+
+        colorScheme: colorScheme,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.black,
+            backgroundColor: colorScheme.secondary,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            minimumSize: const Size(0, 32),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ).copyWith(
+            backgroundColor: WidgetStateProperty.resolveWith((states) {
+              if (states.contains(WidgetState.pressed)) {
+                return colorScheme.tertiary;
+              }
+              return colorScheme.secondary;
+            }),
+          ),
+        ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'FriendFinder'),
     );
   }
 }
@@ -54,19 +73,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -77,10 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
@@ -104,18 +107,276 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: .center,
           children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Chats')
+                ),
+                Text(
+                  'FriendFinder',
+                  style: Theme.of(context).textTheme.headlineLarge,
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text(' ')
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Enter city',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton( 
+                  onPressed: () {},
+                  child: 
+                    Text(
+                      'Use your location', 
+                      style: 
+                        TextStyle(
+                          decoration: TextDecoration.underline
+                        ),
+                    )
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Filter By Interests')
+                )
+              ]
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Events near you',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 215,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: 
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 280,
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: double.infinity,
+                                height: 70,
+                                child: Image.asset(
+                                  'assets/images/placeholder-image.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Text('Shakespeare in the Park'),
+                              SizedBox(height: 8),
+                              Text('October 23, 5:00 PM - Rexburg'),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: const Text('Join'),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    SizedBox(
+                      width: 280,
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: double.infinity,
+                                height: 70,
+                                child: Image.asset(
+                                  'assets/images/placeholder-image.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Text('Shakespeare in the Park'),
+                              SizedBox(height: 8),
+                              Text('October 23, 5:00 PM - Rexburg'),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: const Text('Join'),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    SizedBox(
+                      width: 280,
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: double.infinity,
+                                height: 70,
+                                child: Image.asset(
+                                  'assets/images/placeholder-image.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Text('Shakespeare in the Park'),
+                              SizedBox(height: 8),
+                              Text('October 23, 5:00 PM - Rexburg'),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: const Text('Join'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                  ],
+                ),
+              ),
+            ),
+          Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child:
+                  Text(
+                    'Your Joined Events',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+              ),
+            ),
+            SizedBox(
+              height: 215,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: 
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 280,
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: double.infinity,
+                                height: 70,
+                                child: Image.asset(
+                                  'assets/images/placeholder-image.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Text('Shakespeare in the Park'),
+                              SizedBox(height: 8),
+                              Text('October 23, 5:00 PM - Rexburg'),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: const Text('Join'),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    SizedBox(
+                      width: 280,
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: double.infinity,
+                                height: 70,
+                                child: Image.asset(
+                                  'assets/images/placeholder-image.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Text('Shakespeare in the Park'),
+                              SizedBox(height: 8),
+                              Text('October 23, 5:00 PM - Rexburg'),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: const Text('Join'),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    SizedBox(
+                      width: 280,
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                width: double.infinity,
+                                height: 70,
+                                child: Image.asset(
+                                  'assets/images/placeholder-image.png',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Text('Shakespeare in the Park'),
+                              SizedBox(height: 8),
+                              Text('October 23, 5:00 PM - Rexburg'),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: const Text('Join'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
