@@ -74,6 +74,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool _isInterested = false;
+  bool _isToggledByInterests = false;
+  
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -132,39 +135,52 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Enter city',
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+              padding: const EdgeInsets.only(top: 50, bottom: 10, left: 10, right: 10),
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Enter city',
+                      suffixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
                   ),
-                ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton( 
+                        onPressed: () {},
+                        child: 
+                          Text(
+                            'Use your location', 
+                            style: 
+                              TextStyle(
+                                decoration: TextDecoration.underline
+                              ),
+                          )
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                                  setState(() {
+                                    _isToggledByInterests = !_isToggledByInterests;
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: _isToggledByInterests
+                                      ? Theme.of(context).colorScheme.tertiary
+                                      : Theme.of(context).colorScheme.secondary,
+                                ),
+                        child: Text('Filter By Interests')
+                      )
+                    ]
+                  ),
+                ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TextButton( 
-                  onPressed: () {},
-                  child: 
-                    Text(
-                      'Use your location', 
-                      style: 
-                        TextStyle(
-                          decoration: TextDecoration.underline
-                        ),
-                    )
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('Filter By Interests')
-                )
-              ]
-            ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(top: 10, left: 10),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -201,7 +217,16 @@ class _MyHomePageState extends State<MyHomePage> {
                               SizedBox(height: 8),
                               Text('October 23, 5:00 PM - Rexburg'),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    _isInterested = !_isInterested;
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: _isInterested
+                                      ? Theme.of(context).colorScheme.tertiary
+                                      : Theme.of(context).colorScheme.secondary,
+                                ),
                                 child: const Text('Join'),
                               )
                             ],
@@ -230,7 +255,16 @@ class _MyHomePageState extends State<MyHomePage> {
                               SizedBox(height: 8),
                               Text('October 23, 5:00 PM - Rexburg'),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    _isInterested = !_isInterested;
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: _isInterested
+                                      ? Theme.of(context).colorScheme.tertiary
+                                      : Theme.of(context).colorScheme.secondary,
+                                ),
                                 child: const Text('Join'),
                               )
                             ],
@@ -259,7 +293,16 @@ class _MyHomePageState extends State<MyHomePage> {
                               SizedBox(height: 8),
                               Text('October 23, 5:00 PM - Rexburg'),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    _isInterested = !_isInterested;
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: _isInterested
+                                      ? Theme.of(context).colorScheme.tertiary
+                                      : Theme.of(context).colorScheme.secondary,
+                                ),
                                 child: const Text('Join'),
                               ),
                             ],
@@ -273,7 +316,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           Padding(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(top: 10, left: 10),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child:
@@ -311,7 +354,16 @@ class _MyHomePageState extends State<MyHomePage> {
                               SizedBox(height: 8),
                               Text('October 23, 5:00 PM - Rexburg'),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    _isInterested = !_isInterested;
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: _isInterested
+                                      ? Theme.of(context).colorScheme.tertiary
+                                      : Theme.of(context).colorScheme.secondary,
+                                ),
                                 child: const Text('Join'),
                               )
                             ],
@@ -340,7 +392,16 @@ class _MyHomePageState extends State<MyHomePage> {
                               SizedBox(height: 8),
                               Text('October 23, 5:00 PM - Rexburg'),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    _isInterested = !_isInterested;
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: _isInterested
+                                      ? Theme.of(context).colorScheme.tertiary
+                                      : Theme.of(context).colorScheme.secondary,
+                                ),
                                 child: const Text('Join'),
                               )
                             ],
@@ -369,7 +430,16 @@ class _MyHomePageState extends State<MyHomePage> {
                               SizedBox(height: 8),
                               Text('October 23, 5:00 PM - Rexburg'),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    _isInterested = !_isInterested;
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: _isInterested
+                                      ? Theme.of(context).colorScheme.tertiary
+                                      : Theme.of(context).colorScheme.secondary,
+                                ),
                                 child: const Text('Join'),
                               ),
                             ],
