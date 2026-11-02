@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'sign_up.dart';
 
 class LoginOptions extends StatefulWidget {
   const LoginOptions({super.key});
@@ -93,7 +94,13 @@ class _LoginOptionsState extends State<LoginOptions> {
                     width: double.infinity,
                     height: 40,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (context) => const SignUp(),
+                          ),
+                        );
+                      },
                       child: Text('Sign Up'),
                     ),
                   ),
