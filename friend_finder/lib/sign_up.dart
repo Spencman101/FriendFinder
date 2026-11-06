@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
@@ -9,7 +11,22 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool _obscurePassword = true;
-  
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+  _nameController.dispose();
+  _emailController.dispose();
+  _usernameController.dispose();
+  _passwordController.dispose();
+  _confirmPasswordController.dispose();
+  super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +42,7 @@ class _SignUpState extends State<SignUp> {
               child: Column(
                 children: [
                   TextField(
+                    controller: _nameController,
                     decoration: InputDecoration(
                       hintText: 'Name',
                       border: OutlineInputBorder(
@@ -34,6 +52,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 15),
                   TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       hintText: 'Email',
                       border: OutlineInputBorder(
@@ -43,6 +62,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 15),
                   TextField(
+                    controller: _usernameController,
                     decoration: InputDecoration(
                       hintText: 'Username',
                       border: OutlineInputBorder(
@@ -52,6 +72,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 15),
                   TextField(
+                    controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: 'Password',
@@ -62,6 +83,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 15),
                   TextField(
+                    controller: _confirmPasswordController,
                     obscureText: _obscurePassword,
                     decoration: InputDecoration(
                       hintText: 'Confirm Password',
