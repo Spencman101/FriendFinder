@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'main.dart';
 
 
 class SignUp extends StatefulWidget {
@@ -109,7 +109,12 @@ class _SignUpState extends State<SignUp> {
                     height: 50,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).popUntil((route) => route.isFirst);
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (context) =>
+                                const MyHomePage(title: 'FriendFinder'),
+                          ),
+                        );
                       },
                       child: Text('Sign Up'),
                     ),

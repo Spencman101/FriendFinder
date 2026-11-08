@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'login_options.dart';
+import 'account_navigation.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -112,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: .center,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
                   onPressed: () {},
@@ -126,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute<void>(
-                        builder: (context) => const LoginOptions(),
+                        builder: (context) => const AccountNavigation(),
                       ),
                     );
                   },
